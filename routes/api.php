@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace'=>'Auth'],function(){
@@ -9,3 +10,4 @@ Route::group(['namespace'=>'Auth'],function(){
     Route::delete('logout','LogoutController@logout')->middleware('auth:sanctum')->name('logout');
     Route::delete('logout-all','LogoutController@logoutAll')->middleware('auth:sanctum')->name('logout.all');
 });
+Broadcast::routes(['middleware'=>'auth:sanctum']);

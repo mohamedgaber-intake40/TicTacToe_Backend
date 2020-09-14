@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
+use App\Events\UserLoggedIn;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Resources\TokenResource;
@@ -26,6 +27,8 @@ class LoginController extends Controller
             $token->delete();
 
         $token = $user->createToken($request->device_name);
+
+        event(new UserLoggedIn($user));
 
         return [
             'data'=> [
