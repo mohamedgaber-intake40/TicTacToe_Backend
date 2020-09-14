@@ -11,3 +11,9 @@ Route::group(['namespace'=>'Auth'],function(){
     Route::delete('logout-all','LogoutController@logoutAll')->middleware('auth:sanctum')->name('logout.all');
 });
 Broadcast::routes(['middleware'=>'auth:sanctum']);
+
+Route::get('invite/{user}','InviteController@invite');
+
+Route::get('/test',function (){
+    return 'test';
+});
