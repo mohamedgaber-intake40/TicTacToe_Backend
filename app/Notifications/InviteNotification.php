@@ -30,7 +30,7 @@ class InviteNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['broadcast'];
     }
 
     /**
@@ -56,7 +56,7 @@ class InviteNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'user'=>$this->user
+            'notifiable'=>$notifiable,
         ];
     }
 }
