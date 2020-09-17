@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 
-class InviteNotification extends Notification
+class AcceptInvitationNotification extends Notification
 {
     use Queueable;
     public $user;
@@ -21,6 +21,7 @@ class InviteNotification extends Notification
     public function __construct()
     {
         $this->user = Auth::user();
+
     }
 
     /**
@@ -48,6 +49,7 @@ class InviteNotification extends Notification
                     ->line('Thank you for using our application!');
     }
 
+
     /**
      * Get the array representation of the notification.
      *
@@ -57,12 +59,12 @@ class InviteNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'user'=>$this->user,
+            'user'=>$this->user
         ];
     }
 
     public function broadcastType()
     {
-        return 'invite.notification';
+        return 'accept.invite.notification';
     }
 }

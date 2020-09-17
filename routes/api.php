@@ -13,6 +13,7 @@ Route::group(['namespace'=>'Auth'],function(){
 Broadcast::routes(['middleware'=>'auth:sanctum']);
 
 Route::get('invite/{user}','InviteController@invite');
+Route::get('invite/{user}/accept','InviteController@accept');
 
 Route::get('/test',function (){
     return 'test';
