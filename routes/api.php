@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 
@@ -12,8 +13,19 @@ Route::group(['namespace'=>'Auth'],function(){
 });
 Broadcast::routes(['middleware'=>'auth:sanctum']);
 
-Route::get('invite/{user}','InviteController@invite');
-Route::get('invite/{user}/accept','InviteController@accept');
+
+
+Route::group(['middleware'=>['auth:sanctum']],function (){
+
+    Route::get('user',function (){
+        return Auth::user();
+    });
+
+    Route::get('invite/{user}','InviteController@invite');
+    Route::get('invite/{user}/accept','InviteController@accept');
+
+    Route::post('games','GameController@store')->name('games.store');
+});
 
 Route::get('/test',function (){
     return 'test';

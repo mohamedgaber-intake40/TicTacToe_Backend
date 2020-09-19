@@ -13,12 +13,13 @@ class InviteController extends Controller
 {
     public function invite(Request $request , User $user)
     {
-        dd($request->user());
         $user->notify(new InviteNotification());
+        return response([]);
     }
 
     public function accept(Request $request , User $user)
     {
         $user->notify(new AcceptInvitationNotification());
+        return response([]);
     }
 }

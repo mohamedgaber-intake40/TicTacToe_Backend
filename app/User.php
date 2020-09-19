@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Game;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -49,5 +50,10 @@ class User extends Authenticatable
     public function receivesBroadcastNotificationsOn()
     {
         return 'user.'.$this->id;
+    }
+
+    public function games()
+    {
+        return $this->hasMany(Game::class,'first_player_id');
     }
 }
