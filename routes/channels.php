@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Broadcast;
+use \App\Models\Game;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,15 @@ Broadcast::channel('user.{id}',function ($user,$id){
 
 Broadcast::channel('online-channel',function($user){
     return $user;
+});
+
+Broadcast::channel('game.{id}',function ($user,$id){
+   $game = Game::find($id);
+//   $game->loadMissing('firstPlayer','secondPlayer');
+//   dd($game);
+   if(in_array($user->id,[ $game->first_player_id  ,$game->second_player_id ]))
+   {
+       return $user;
+   }
+   return false;
 });

@@ -57,13 +57,28 @@ class GameHandler
             $this->board [$move->pos_x] [$move->pos_y] = $move->symbol;
             $this->changeSymbol();
         }
-//        dd($this->board);
         return $this;
     }
 
     public function checkForWin()
     {
         return $this->checkColumns() || $this->checkRows() || $this->checkCross();
+    }
+
+    public function checkForDraw()
+    {
+        $drawn = true;
+        for($i = 0 ; $i < 3 ; $i++)
+        {
+            for($j = 0 ; $j < 3 ; $j++)
+            {
+                if( is_null( $this->board[$i][$j] ) )
+                {
+                    $drawn = false;
+                }
+            }
+        }
+        return $drawn;
     }
 
     private function checkRows()
@@ -108,7 +123,7 @@ class GameHandler
         return false;
     }
 
-    public function checkMoveAvailable($pos_x,$pos_y,$symbol)
+    private function checkMoveAvailable($pos_x,$pos_y,$symbol)
     {
 //        dd(is_null($this->board[$pos_x][$pos_y]));
         return is_null($this->board[$pos_x][$pos_y]) && $symbol == $this->current_symbol;
@@ -117,5 +132,15 @@ class GameHandler
     private function changeSymbol()
     {
         $this->current_symbol = $this->current_symbol == 'x' ? 'o' : 'x';
+    }
+
+    public function playMove($pos_x,$pos_y,$symbol)
+    {
+        $played = false;
+        if($this->checkMoveAvailable($pos_x,$pos_y,$symbol)){
+            $this->board[$pos_x][$pos_y] = $symbol;
+            $played = true;
+        }
+        return $played;
     }
 }
