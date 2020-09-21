@@ -28,7 +28,7 @@ class LoginController extends Controller
 
         $token = $user->createToken($request->device_name);
 
-        event(new UserLoggedIn($user));
+//        event(new UserLoggedIn($user));
 
         return [
             'data'=> [

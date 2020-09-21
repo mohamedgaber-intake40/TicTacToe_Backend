@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/test',function(){
+    return 'blabla';
+});
 Route::group(['namespace'=>'Auth'],function(){
     Route::post('login','LoginController@login')->name('login');
     Route::post('register','RegisterController@register')->name('register');
@@ -25,6 +28,8 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::get('invite/{user}/accept','InviteController@accept');
 
     Route::post('games','GameController@store')->name('games.store');
+
+    Route::post('games/{game}/moves','MoveController@store')->name('moves.store');
 });
 
 Route::get('/test',function (){
