@@ -33,7 +33,7 @@ class MoveController extends Controller
         if($handler->checkForWin())
         {
             $game->update([ 'winner_id' => $user->id ]);
-            event(new GameWon($game->id ));
+            event(new GameWon($game->id , $handler->getWinPos()));
         }
         else if($handler->checkForDraw())
         {

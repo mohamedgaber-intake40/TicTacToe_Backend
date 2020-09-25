@@ -18,16 +18,19 @@ class GameWon implements  ShouldBroadcast
 
     private $game_id;
     public $winner;
+    public $win_pos;
 
     /**
      * Create a new event instance.
      *
      * @param $game_id
+     * @param array $win_pos
      */
-    public function __construct($game_id)
+    public function __construct($game_id, array $win_pos)
     {
         $this->game_id = $game_id;
         $this->winner = new UserResource(Auth::user());
+        $this->win_pos = $win_pos;
     }
 
     /**

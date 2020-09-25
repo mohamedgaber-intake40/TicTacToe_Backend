@@ -143,4 +143,9 @@ class GameHandler
         }
         return $played;
     }
+
+    public function getWinPos()
+    {
+        return $this->win_pos;
+    }
 }
